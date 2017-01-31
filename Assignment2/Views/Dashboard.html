@@ -1,0 +1,78 @@
+﻿d<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+	<meta charset="utf-8" />
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <form class="form-group form-group-md"
+            ng-app="customerInformation"
+            ng-controller="dashboardController" 
+            name="dashboardForm">
+       
+            <div class="container">
+                <h2>Dashboard</h2>
+                <div class="container-fluid">
+                    <div class="col">
+                        <div class="row">
+                            <label>Welcome : {{userLogged}}</label>
+                            </div>
+                        <!--<div class="row">
+                            <div class="col-sm-4">.col-sm-4</div>
+                            <div class="col-sm-4">.col-sm-4</div>
+                            <div class="col-sm-4">.col-sm-4</div>
+                        </div>-->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>FirstName</th>
+                                        <th>LastName</th>
+                                        <th>DateofBirth</th>
+                                        <th>CountryofBirth</th>
+                                        <th>Social Security Number</th>
+                                        <th>Email Address</th>
+                                        <th>Options choosen</th>
+                                        <th>Actions to  choose</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr >
+                                        <td>{{userData.CustomerFirstName}}</td>
+                                        <td>{{userData.CustomerLastName}}</td>
+                                        <td>{{userData.DateofBirth}}</td>
+                                        <td>{{userData.CountryOfBirth}}</td>
+                                        <td>{{userData.SocialSecurityNumber}}</td>
+                                        <td>{{userData.Email}}</td>
+                                        <td>{{userData.CustomerOptions.toString()}}</td>
+                                        <td>
+                                        <a class="badge badge-important" ng-click="deleteAccount(userData.CustomerId)">
+                                        Delete
+                                        </a>
+                                            <a class="badge badge-info" ng-click="updateAccount(userData.CustomerId)" >
+                                                Update
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</form>
+        </div>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-resource.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script src="../app/app.js"></script>
+    <script src="../app/Login/uxloginController.js"></script>
+    <link href="../Content/app.css" rel="stylesheet" />
+    <script src="../app/Dashboard/dashboardController.js"></script>
+</body>
+</html>

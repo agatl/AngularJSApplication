@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div class="container">
+        <form class="form-group form-group-md" ng-app="customerInformation"
+              ng-controller="dummyController" name="myForm"  novalidate>
+            <h2>Dummy Page</h2>
+            <button class="btn btn-primary btn-right" type="button" ng-click="submit()" ng-disabled="myForm.$invalid">
+                Click <span class="glyphicon glyphicon-log-in"></span>
+            </button>
+            </form>
+    </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="../Scripts/angular.js"></script>
+            <script src="../Scripts/angular-resource.js"></script>
+            <script src="../app/app.js"></script>
+            <script src="../app/dummyJavaScript.js"></script>
+            <link href="../Content/app.css" rel="stylesheet" />
+</body>
+</html>

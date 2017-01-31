@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+</head>
+<body>
+    <div class="container" ng-view> 
+        <form class="form-group form-group-md" ng-app="customerInformation" 
+              ng-controller="loginController" name="myForm" ng-submit="submit()" novalidate>
+            <h2>Login Page</h2>
+            <div ng-show="customError" class="alert alert-danger">
+                <span ng-model="error">{{error}}</span>
+            </div>
+            <div class="container"> 
+    <div class="col-xs-4">
+        <div class="row-xs-4">
+            <div>
+                <label>UserName:</label>
+            </div>
+            <div>
+                <input class="form-control input-md" type="text" id="uName" name="uName" ng-model="customer.userName" ng-pattern="/[a-z0-9]+$/" placeholder="User Name" required>
+                <div class="error errorText" ng-show="myForm.uName.$submitted||myForm.uName.$dirty || myForm.uName.$touched">
+                    <div class="error" ng-show="myForm.uName.$error.required">User Name is required.</div>
+                    <div class="error" ng-show="myForm.uName.$error.pattern">*Please enter valid User Name</div>
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="row-xs-4">
+            <div>
+                <label>Password:</label>
+            </div>
+            <div>
+                <input class="form-control" type="password" name="password" ng-model="customer.password" placeholder="Password" required>
+                <div class="error errorText" ng-show="myForm.password.$submitted||myForm.password.$dirty || myForm.password.$touched">
+                    <div class="error" ng-show="myForm.password.$error.required">Password is required.</div>
+                </div>
+            </div>
+            <br />
+        </div>  
+        <div class="row-md-4">
+            <button class="btn btn-primary btn-right" type="submit" ng-disabled="myForm.$invalid">
+                Login <span class="glyphicon glyphicon-log-in"></span>
+            </button>
+            <a href="Register.html" class="btn">Register</a>
+        </div>
+    </div>
+</div>
+</form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-resource.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script src="../app/app.js"></script>
+    <script src="../app/Login/uxloginModel.js"></script>
+    <script src="../app/Login/uxloginController.js"></script>
+    <link href="../Content/app.css" rel="stylesheet" />
+</body>
+</html>
+

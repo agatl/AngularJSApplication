@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../Content/app.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+    <form class="form-group form-group-md" ng-app="customerInformation" 
+          ng-controller="customerController" name="myform" 
+          ng-submit="Submit()"
+          novalidate>
+        <div class="container">
+            <h2>{{buttonName}}</h2>
+            <div ng-show="customError" class="alert alert-danger">
+                <span ng-model="error">{{error}}</span>
+            </div>
+            <div class="container">
+                <div class="col-xs-4">
+                    <div>
+                        <label>First Name:</label>
+                        <input class="form-control" type="text" name="fName" autocomplete="off" ng-model="register.firstName" ng-pattern="/[a-z0-9]*$/" placeholder="Enter first Name" required>
+                            <div class="error errorText" ng-show="myform.fName.$dirty && myform.fName.$invalid">
+                                <div ng-show="myform.fName.$error.required">First Name is required.</div>
+                                <div ng-show="myform.fName.$error.pattern">Please enter valid First Name</div>   
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label>Last Name:</label>
+                        </div>
+                        <div>
+                            <input class="form-control" type="text" autocomplete="off" name="lName" ng-model="register.lastName" ng-pattern="/[a-z0-9]*$/" placeholder="Enter Last Name" required />
+                            <div class="errorText" ng-show="myform.lName.$dirty && myform.lName.$invalid">
+                                <div ng-show="myform.lName.$error.required">Last Name is required.</div>
+                                <div ng-show="myform.lName.$error.pattern">Please enter valid Last Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-xs-4">
+                            <label>Gender:</label>
+                            <label class="radio-inline"><input type="radio" ng-model="register.gender" name="gender" value="male"  >male</label>
+                            <label class="radio-inline"><input type="radio" ng-model="register.gender" name="gender" value="female">female</label><br />
+                    </div>
+                    <div class="row-xs-4">
+                        <label>Date of Birth:</label>
+                            <input class="ui-datepicker-group form-control" type="date" name="dob" ng-model="register.dateOfBirth" ng-change="validateDob()" required>
+                            <div class="error errorText" ng-show="myform.dob.$dirty && myform.dob.$invalid">
+                                <div ng-show="myform.dob.$error.required">Date of Birth is required.</div>
+                            </div>
+                            <div class="error errorText" ng-model="register.date" ng-show="value">Date of Birth is invalid.</div>
+                    </div>
+                    <div class="row-xs-4">
+                        <label>Country of Birth:</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{selectedCountry}}
+                                <span class="caret">
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li ng-repeat="a in countries">
+                                    <a ng-click="dropboxitemselected(a)">
+                                        {{a}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="error errorText" ng-model="countries" ng-show="isCountrySelected">Please select Country of Birth.</div>
+                        </div>
+                        <div>
+                            <label>SSN:</label>
+                            <input class="form-control" type="text" name="ssn" autocomplete="off" ng-model="register.socialSecurityNumber" placeholder="xxx-xx-xxxx" ng-pattern="ssnPattern" required>
+                            <div class="errorText" ng-show="myform.ssn.$dirty && myform.ssn.$invalid">
+                                <div ng-show="myform.ssn.$error.required">SSN is required.</div>
+                                <div ng-show="myform.ssn.$error.pattern">Invalid SSN.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Email:</label>
+                            <input class="form-control" type="email" name="email" ng-model="register.email1" ng-pattern="/^([a-zA-Z0-9])+([a-zA-Z0-9._%+-])+@([a-zA-Z0-9_.-])+\.(([a-zA-Z]){2,6})$/" placeholder="example@domain.com" required>
+                            <div class="errorText" ng-show="myform.email.$dirty && myform.email.$invalid">
+                                <div ng-show="myform.email.$error.required">Email is required.</div>
+                                <div ng-show="myform.email.$error.untouched">Email is required.</div>
+                                <div ng-show="myform.email.$error.email">Please enter valid email</div>
+                            </div>
+                        </div>
+                        <div ng-model="checkDiv">
+                            <label class="checkbox">How did you know about us:</label>
+                            <label class="checkbox-inline" ng-repeat="item in listofOptions">
+                                <input class="checkbox" type="checkbox" value="item.name" ng-model="item.selected" />
+                                <label class="checkbox" ng-model="item">{{item.name}}</label>
+                            </label>
+                        </div>
+                    </div>
+                <div class="col-xs-2"></div>
+                    <div class="col-xs-4" ng-hide="isEdit">
+                        <div class="form-group">
+                            <label>User Name</label>
+                            <input type="text" name="username" class="form-control" placeholder='User Name' ng-model="register.userName" required />
+                            <div class="errorText" ng-show="myform.username.$dirty && myform.username.$invalid">
+                                <div ng-show="myform.username.$error">
+                                    User Name is Required.
+                                </div>
+                            </div>
+                      </div>
+
+                       <div class="form-group">
+                            <label>Password</label>
+                            <input data-ng-model='register.password' class="form-control" type="password" name='password' placeholder='Password' required>
+                           <div class="errorText" ng-show="myform.password.$dirty && myform.password.$invalid">
+                               <div ng-show="myform.password.$error">
+                                   Field required
+                               </div>
+                           </div>
+                           </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input ng-model='register.password_verify' class="form-control" type="password" name='confirm_password' placeholder='Confirm Password' required data-password-verify="register.password">
+                            <div class="errorText" ng-show="myform.confirm_password.$dirty && myform.confirm_password.$invalid">
+                                <div ng-show="myform.confirm_password.$error.required">
+                                    Password required!
+                                </div>
+                            </div>
+                                <div class="errorText" ng-show="myform.confirm_password.$error.passwordVerify">
+                                    Passwords are not same!
+                                </div>
+                            </div>
+                        
+                    </div>
+        </div>
+            <div class="container">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">
+                            {{buttonName}}
+                            <span class="glyphicon glyphicon-ok-sign"></span>
+                        </button>
+                        <br />
+                    </div>
+                </div>
+             </div>
+            </div>
+</form>
+     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-resource.js"></script>
+    <script src="../app/app.js"></script>
+    <script src="../app/Register/registerModel.js"></script>
+    <script src="../app/Register/registerController.js"></script>
+</body>
+</html>
